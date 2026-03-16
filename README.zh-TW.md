@@ -14,13 +14,13 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 
 | 🤖 AI 智能體 | 🌏 英文版翻譯 | 🇨🇳 中國市場原創 | 🧠 支援工具 |
 |:---:|:---:|:---:|:---:|
-| **157** | **135** | **22** | **10 種** |
+| **161** | **135** | **26** | **10 種** |
 
 ---
 
 ## 這是什麼？
 
-**157 個即插即用的 AI 專家人格**——每個都有獨特的專業技能、溝通風格和可落地的工作流，不是通用模板。
+**161 個即插即用的 AI 專家人格**——每個都有獨特的專業技能、溝通風格和可落地的工作流，不是通用模板。
 
 ---
 
@@ -96,6 +96,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | [SRE](engineering/engineering-sre.md) | SLO、可觀測性、混沌工程 | 站點可靠性工程 |
 | [AI 資料修復工程師](engineering/engineering-ai-data-remediation-engineer.md) | 自愈管道、SLM 語義聚類、零資料丟失 | 大規模資料異常修復 |
 | [飛書整合開發工程師](engineering/engineering-feishu-integration-developer.md) ⭐ | 飛書機器人、審批流、多維表格 | 飛書生態整合開發 |
+| [釘釘整合開發工程師](engineering/engineering-dingtalk-integration-developer.md) ⭐ | 釘釘機器人、酷應用、聯結器 | 釘釘生態整合開發 |
 
 ### 🎨 設計部
 
@@ -134,6 +135,8 @@ cp -r marketing/*.md ~/.claude/agents/
 | [短影片剪輯指導師](marketing/marketing-short-video-editing-coach.md) ⭐ | 剪映/PR/達芬奇、調色、音訊、特效 | 短影片剪輯技術指導 |
 | [微博運營策略師](marketing/marketing-weibo-strategist.md) ⭐ | 熱搜運營、超話、輿情公關、粉絲經濟 | 微博全鏈路運營 |
 | [播客內容策略師](marketing/marketing-podcast-strategist.md) ⭐ | 小宇宙/喜馬拉雅、音訊製作、商業化 | 播客內容創作與增長 |
+| [微信影片號運營策略師](marketing/marketing-weixin-channels-strategist.md) ⭐ | 影片號直播、社交裂變、私域閉環 | 影片號運營與變現 |
+| [知識付費產品策劃師](marketing/marketing-knowledge-commerce-strategist.md) ⭐ | 得到/知識星球/小鵝通、內容定價 | 知識付費產品運營 |
 | [小紅書專家](marketing/marketing-xiaohongshu-specialist.md) | 生活方式內容、趨勢策略 | 小紅書品牌建設 |
 | [微信公眾號管理](marketing/marketing-wechat-official-account.md) | 訂閱者運營、內容營銷 | 微信公眾號增長 |
 | [知乎策略師](marketing/marketing-zhihu-strategist.md) | 知識型內容、思想領袖建設 | 知乎品牌權威 |
@@ -276,6 +279,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | [自動化治理架構師](specialized/automation-governance-architect.md) | 自動化審計、n8n 工作流治理、風險評估 | 業務自動化決策 |
 | [Salesforce 架構師](specialized/specialized-salesforce-architect.md) | Salesforce 多雲設計、整合、資料模型 | 企業級 Salesforce 架構 |
 | [醫療健康營銷合規師](specialized/healthcare-marketing-compliance.md) ⭐ | 醫療廣告法、NMPA、網際網路醫療 | 醫療健康營銷合規 |
+| [高考志願填報顧問](specialized/gaokao-college-advisor.md) ⭐ | 平行志願、位次法、衝穩保策略 | 高考志願填報規劃 |
 
 ### 🥽 空間計算部
 
@@ -562,7 +566,7 @@ cd /your/project
 
 ## 🇨🇳 中國市場原創智能體
 
-除翻譯外，本專案包含 **22 個原創智能體**，專為中國平臺和業務場景打造。覆蓋小紅書、抖音、微信、B站、快手、飛書、百度等平臺，以及跨境電商、政務ToG、醫療合規等垂直領域。
+除翻譯外，本專案包含 **26 個原創智能體**，專為中國平臺和業務場景打造。覆蓋小紅書、抖音、微信、B站、快手、飛書、百度等平臺，以及跨境電商、政務ToG、醫療合規等垂直領域。
 
 > 在上方智能體陣容中標有 ⭐ 的即為原創智能體。
 

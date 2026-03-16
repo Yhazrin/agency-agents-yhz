@@ -14,13 +14,13 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 
 | 🤖 AI 智能体 | 🌏 英文版翻译 | 🇨🇳 中国市场原创 | 🧠 支持工具 |
 |:---:|:---:|:---:|:---:|
-| **157** | **135** | **22** | **10 种** |
+| **161** | **135** | **26** | **10 种** |
 
 ---
 
 ## 这是什么？
 
-**157 个即插即用的 AI 专家人格**——每个都有独特的专业技能、沟通风格和可落地的工作流，不是通用模板。
+**161 个即插即用的 AI 专家人格**——每个都有独特的专业技能、沟通风格和可落地的工作流，不是通用模板。
 
 ---
 
@@ -96,6 +96,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | [SRE](engineering/engineering-sre.md) | SLO、可观测性、混沌工程 | 站点可靠性工程 |
 | [AI 数据修复工程师](engineering/engineering-ai-data-remediation-engineer.md) | 自愈管道、SLM 语义聚类、零数据丢失 | 大规模数据异常修复 |
 | [飞书集成开发工程师](engineering/engineering-feishu-integration-developer.md) ⭐ | 飞书机器人、审批流、多维表格 | 飞书生态集成开发 |
+| [钉钉集成开发工程师](engineering/engineering-dingtalk-integration-developer.md) ⭐ | 钉钉机器人、酷应用、连接器 | 钉钉生态集成开发 |
 
 ### 🎨 设计部
 
@@ -134,6 +135,8 @@ cp -r marketing/*.md ~/.claude/agents/
 | [短视频剪辑指导师](marketing/marketing-short-video-editing-coach.md) ⭐ | 剪映/PR/达芬奇、调色、音频、特效 | 短视频剪辑技术指导 |
 | [微博运营策略师](marketing/marketing-weibo-strategist.md) ⭐ | 热搜运营、超话、舆情公关、粉丝经济 | 微博全链路运营 |
 | [播客内容策略师](marketing/marketing-podcast-strategist.md) ⭐ | 小宇宙/喜马拉雅、音频制作、商业化 | 播客内容创作与增长 |
+| [微信视频号运营策略师](marketing/marketing-weixin-channels-strategist.md) ⭐ | 视频号直播、社交裂变、私域闭环 | 视频号运营与变现 |
+| [知识付费产品策划师](marketing/marketing-knowledge-commerce-strategist.md) ⭐ | 得到/知识星球/小鹅通、内容定价 | 知识付费产品运营 |
 | [小红书专家](marketing/marketing-xiaohongshu-specialist.md) | 生活方式内容、趋势策略 | 小红书品牌建设 |
 | [微信公众号管理](marketing/marketing-wechat-official-account.md) | 订阅者运营、内容营销 | 微信公众号增长 |
 | [知乎策略师](marketing/marketing-zhihu-strategist.md) | 知识型内容、思想领袖建设 | 知乎品牌权威 |
@@ -276,6 +279,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | [自动化治理架构师](specialized/automation-governance-architect.md) | 自动化审计、n8n 工作流治理、风险评估 | 业务自动化决策 |
 | [Salesforce 架构师](specialized/specialized-salesforce-architect.md) | Salesforce 多云设计、集成、数据模型 | 企业级 Salesforce 架构 |
 | [医疗健康营销合规师](specialized/healthcare-marketing-compliance.md) ⭐ | 医疗广告法、NMPA、互联网医疗 | 医疗健康营销合规 |
+| [高考志愿填报顾问](specialized/gaokao-college-advisor.md) ⭐ | 平行志愿、位次法、冲稳保策略 | 高考志愿填报规划 |
 
 ### 🥽 空间计算部
 
@@ -562,7 +566,7 @@ cd /your/project
 
 ## 🇨🇳 中国市场原创智能体
 
-除翻译外，本项目包含 **22 个原创智能体**，专为中国平台和业务场景打造。覆盖小红书、抖音、微信、B站、快手、飞书、百度等平台，以及跨境电商、政务ToG、医疗合规等垂直领域。
+除翻译外，本项目包含 **26 个原创智能体**，专为中国平台和业务场景打造。覆盖小红书、抖音、微信、B站、快手、飞书、百度等平台，以及跨境电商、政务ToG、医疗合规等垂直领域。
 
 > 在上方智能体阵容中标有 ⭐ 的即为原创智能体。
 
