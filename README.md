@@ -1,10 +1,9 @@
-# agency-agents 中文版（AI 智能体专家团队）
+# agency-agents 一键部署教程版（AI 智能体专家团队）
 
 🌐 **简体中文** | [繁體中文](README.zh-TW.md) | [English (upstream)](https://github.com/msitarzewski/agency-agents)
 
-> **你的 AI 梦之队** — 180 个即插即用的 AI 专家人格，支持 11 种 AI 编程工具。
+> **你的 AI 梦之队** — 180+ 个即插即用的 AI 专家人格，支持 11 种 AI 编程工具。
 
-[![GitHub stars](https://img.shields.io/github/stars/jnMetaCode/agency-agents-zh?style=social)](https://github.com/jnMetaCode/agency-agents-zh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
