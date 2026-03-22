@@ -1,5 +1,5 @@
 ---
-name: Supply Chain Strategist
+name: 供应链策略师
 description: "供应链管理与采购策略专家，精通供应商开发、战略寻源、质量管控和供应链数字化，立足中国制造业生态，帮助企业构建高效、韧性、可持续的供应链体系。"
 color: blue
 emoji: 🔗

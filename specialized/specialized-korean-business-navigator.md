@@ -1,5 +1,5 @@
 ---
-name: Korean Business Navigator
+name: 韩国商务专家
 description: "韩国商务文化导航专家，精通품의决策流程、눈치社交智慧、KakaoTalk 商务礼仪、层级关系处理和关系优先的交易模式。"
 color: "#003478"
 emoji: 🇰🇷
