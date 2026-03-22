@@ -1,4 +1,3 @@
-# 转换输出目录（由 scripts/convert.sh 生成）
-integrations/
+# integrations/ 已移除——预转换文件现在可随仓库提交，方便 curl 一键安装
 .claude/
 openspec/.DS_Store

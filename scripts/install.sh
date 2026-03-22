@@ -55,8 +55,13 @@ usage() {
 # --- 预检 ---
 check_integrations() {
   if [[ ! -d "$INTEGRATIONS" ]]; then
-    err "integrations/ 不存在。请先运行 ./scripts/convert.sh"
-    exit 1
+    warn "integrations/ 不存在，正在自动运行 convert.sh 生成..."
+    bash "$SCRIPT_DIR/convert.sh"
+    if [[ ! -d "$INTEGRATIONS" ]]; then
+      err "convert.sh 运行后 integrations/ 仍不存在，请检查。"
+      exit 1
+    fi
+    ok "已自动生成 integrations/"
   fi
 }
 

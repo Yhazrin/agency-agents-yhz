@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>agency-agents-yhz 使用指南</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f8f9fa; --bg3: #e9ecef;
+    --fg: #212529; --fg2: #495057; --fg3: #868e96;
+    --accent: #228be6; --accent2: #1971c2;
+    --green: #2b8a3e; --yellow: #e67700; --red: #c92a2a;
+    --border: #dee2e6; --code-bg: #f1f3f5;
+    --shadow: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1b1e; --bg2: #25262b; --bg3: #2c2e33;
+      --fg: #c1c2c5; --fg2: #909296; --fg3: #5c5f66;
+      --accent: #4dabf7; --accent2: #74c0fc;
+      --green: #51cf66; --yellow: #fcc419; --red: #ff6b6b;
+      --border: #373a40; --code-bg: #2c2e33;
+      --shadow: rgba(0,0,0,0.3);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    background: var(--bg); color: var(--fg);
+    line-height: 1.7; max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent); }
+  p { margin-bottom: 0.8rem; color: var(--fg2); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    background: var(--code-bg); padding: 0.15em 0.4em; border-radius: 4px;
+    font-size: 0.9em; font-family: "Fira Code", "Cascadia Code", monospace;
+  }
+  pre {
+    background: var(--code-bg); padding: 1rem; border-radius: 8px;
+    overflow-x: auto; margin: 0.8rem 0; border: 1px solid var(--border);
+  }
+  pre code { background: none; padding: 0; }
+  .hero {
+    text-align: center; padding: 3rem 1rem;
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border-radius: 12px; margin-bottom: 2rem;
+  }
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1.1rem; max-width: 600px; margin: 0.5rem auto 0; }
+  .badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    padding: 0.2em 0.7em; border-radius: 20px; font-size: 0.85em; margin: 0.3em;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem; transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 12px var(--shadow); }
+  .card h4 { margin-bottom: 0.3rem; }
+  .card p { font-size: 0.9rem; margin: 0; }
+  .step {
+    background: var(--bg2); border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 0.8rem 0;
+  }
+  .step-num {
+    display: inline-block; background: var(--accent); color: #fff;
+    width: 1.6em; height: 1.6em; text-align: center; line-height: 1.6em;
+    border-radius: 50%; font-size: 0.85em; margin-right: 0.5em;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { text-align: left; padding: 0.5em 0.8em; border-bottom: 1px solid var(--border); }
+  th { background: var(--bg2); font-weight: 600; }
+  details { margin: 0.8rem 0; }
+  summary {
+    cursor: pointer; font-weight: 600; padding: 0.5rem;
+    background: var(--bg2); border-radius: 6px;
+  }
+  summary:hover { background: var(--bg3); }
+  .tip {
+    background: var(--bg2); border: 1px solid var(--green);
+    border-radius: 8px; padding: 0.8rem 1rem; margin: 1rem 0;
+  }
+  .tip::before { content: "💡 "; }
+  footer { text-align: center; margin-top: 3rem; color: var(--fg3); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>agency-agents-yhz</h1>
+  <p>180 个即插即用的 AI 专家人格，支持 11 种 AI 编程工具</p>
+  <div>
+    <span class="badge">180 智能体</span>
+    <span class="badge">11 工具</span>
+    <span class="badge">45 原创</span>
+  </div>
+</div>
+
+<h2>已安装的工具</h2>
+<p>以下是本项目支持的所有 AI 工具。安装脚本会自动检测你已安装的工具。</p>
+
+<div class="grid">
+  <div class="card"><h4>Claude Code</h4><p>直接复制到 <code>~/.claude/agents/</code></p></div>
+  <div class="card"><h4>GitHub Copilot</h4><p>复制到 <code>~/.github/agents/</code></p></div>
+  <div class="card"><h4>Cursor</h4><p>转换为 <code>.cursor/rules/</code></p></div>
+  <div class="card"><h4>Trae</h4><p>转换为 <code>.trae/rules/</code></p></div>
+  <div class="card"><h4>OpenClaw</h4><p>SOUL.md 格式</p></div>
+  <div class="card"><h4>OpenCode</h4><p><code>.opencode/agents/</code></p></div>
+  <div class="card"><h4>Aider</h4><p>单文件 CONVENTIONS.md</p></div>
+  <div class="card"><h4>Windsurf</h4><p>单文件 .windsurfrules</p></div>
+  <div class="card"><h4>Gemini CLI</h4><p>扩展格式</p></div>
+  <div class="card"><h4>Antigravity</h4><p>Skill 格式</p></div>
+  <div class="card"><h4>Qwen Code</h4><p>SubAgent 格式</p></div>
+</div>
+
+<h2>怎么用？</h2>
+<p>安装完成后，在你的 AI 工具中通过<strong>自然语言</strong>激活智能体。不需要特殊语法，直接说就行。</p>
+
+<div class="step">
+  <span class="step-num">1</span>
+  <strong>打开你的 AI 工具</strong>（Claude Code、Cursor 等）
+</div>
+<div class="step">
+  <span class="step-num">2</span>
+  <strong>用自然语言激活智能体</strong>，例如：
+</div>
+
+<pre><code>激活前端开发者模式，帮我审查这个 React 组件。
+
+作为小红书运营专家，帮我写一篇种草笔记。
+
+使用代码审查员智能体，检查这个 PR 的安全问题。
+
+请以数据分析师的身份，分析这些销售数据。</code></pre>
+
+<div class="step">
+  <span class="step-num">3</span>
+  <strong>AI 会以该专家的身份和风格回复你</strong>，按照预设的专业流程工作
+</div>
+
+<h2>热门智能体</h2>
+
+<table>
+  <tr><th>部门</th><th>热门智能体</th><th>适用场景</th></tr>
+  <tr><td>工程</td><td>前端开发者、后端架构师、代码审查员</td><td>Web 开发、代码审查、架构设计</td></tr>
+  <tr><td>营销</td><td>小红书运营、抖音策略师、微信公众号运营</td><td>社媒运营、内容营销、品牌推广</td></tr>
+  <tr><td>设计</td><td>UI 设计师、UX 研究员、品牌守护者</td><td>界面设计、用户研究、品牌一致性</td></tr>
+  <tr><td>产品</td><td>产品经理、Sprint 排序师、趋势研究员</td><td>需求管理、规划、市场调研</td></tr>
+  <tr><td>测试</td><td>API 测试员、性能基准师、无障碍审核员</td><td>接口测试、压测、WCAG 合规</td></tr>
+  <tr><td>销售</td><td>赢单策略师、售前工程师、Pipeline 分析师</td><td>销售推进、技术方案、预测分析</td></tr>
+</table>
+
+<h2>实战示例</h2>
+
+<h3>场景一：代码审查</h3>
+<p>用 3 个智能体配合，对 PR 进行全面审查。</p>
+<details>
+<summary>展开查看完整流程</summary>
+<ol>
+  <li><strong>代码审查员</strong> — 逐行检查代码质量、错误处理、命名规范</li>
+  <li><strong>安全工程师</strong> — 检查注入漏洞、认证问题、敏感数据泄露</li>
+  <li><strong>性能基准师</strong> — 评估复杂度、N+1 查询、内存使用</li>
+</ol>
+<p>完整示例：<a href="https://github.com/Yhazrin/agency-agents-yhz/blob/main/examples/workflow-code-review.md">workflow-code-review.md</a></p>
+</details>
+
+<h3>场景二：小红书品牌推广</h3>
+<p>从 0 到 1 完成种草推广全流程。</p>
+<details>
+<summary>展开查看完整流程</summary>
+<ol>
+  <li><strong>小红书运营</strong> — 制定内容策略和达人合作方案</li>
+  <li><strong>品牌守护者</strong> — 确保品牌调性一致</li>
+  <li><strong>内容创作者</strong> — 产出种草笔记</li>
+  <li><strong>数据分析师</strong> — 追踪投放数据、出复盘报告</li>
+  <li><strong>增长黑客</strong> — 设计裂变和转化路径</li>
+</ol>
+<p>完整示例：<a href="https://github.com/Yhazrin/agency-agents-yhz/blob/main/examples/workflow-xiaohongshu-launch.md">workflow-xiaohongshu-launch.md</a></p>
+</details>
+
+<h3>场景三：出海产品 MVP</h3>
+<p>5 个智能体协作，快速构建产品原型。</p>
+<details>
+<summary>展开查看完整流程</summary>
+<ol>
+  <li><strong>前端开发者</strong> — 构建 React 应用</li>
+  <li><strong>后端架构师</strong> — 设计 API 和数据库</li>
+  <li><strong>增长黑客</strong> — 规划用户获取策略</li>
+  <li><strong>快速原型师</strong> — 快速迭代</li>
+  <li><strong>现实检验者</strong> — 上线前质量把关</li>
+</ol>
+</details>
+
+<h2>全部智能体一览</h2>
+
+<details>
+<summary>工程部（28 个）</summary>
+<p>前端开发者、后端架构师、AI 工程师、DevOps 自动化、安全工程师、快速原型师、高级开发者、移动应用开发者、数据工程师、技术文档工程师、自主优化架构师、嵌入式固件工程师、嵌入式 Linux 驱动工程师、FPGA/ASIC 数字设计工程师、IoT 方案架构师、故障响应指挥官、威胁检测工程师、Solidity 智能合约工程师、微信小程序开发者、代码审查员、数据库优化师、Git 工作流大师、软件架构师、SRE、AI 数据修复工程师、飞书集成开发工程师、钉钉集成开发工程师</p>
+</details>
+
+<details>
+<summary>设计部（8 个）</summary>
+<p>UI 设计师、UX 研究员、UX 架构师、品牌守护者、图像提示词工程师、视觉叙事师、趣味注入师、包容性视觉专家</p>
+</details>
+
+<details>
+<summary>营销部（27 个）</summary>
+<p>小红书运营、抖音策略师、微信公众号运营、B站内容策略师、快手策略师、中国电商运营师、电商运营师、百度 SEO 专家、私域流量运营师、直播电商主播教练、跨境电商运营专家、短视频剪辑指导师、微博运营策略师、播客内容策略师、微信视频号运营策略师、知识付费产品策划师、小红书专家、微信公众号管理、知乎策略师、TikTok 策略师、Twitter 互动官、Instagram 策展师、Reddit 社区运营、应用商店优化师、增长黑客、内容创作者、社交媒体策略师、SEO 专家、轮播图增长引擎、LinkedIn 内容创作专家、图书联合作者</p>
+</details>
+
+<details>
+<summary>付费媒体部（7 个）</summary>
+<p>付费媒体审计师、广告创意策略师、社交广告策略师、PPC 竞价策略师、程序化广告采买专家、搜索词分析师、追踪与归因专家</p>
+</details>
+
+<details>
+<summary>销售部（8 个）</summary>
+<p>客户拓展策略师、销售教练、赢单策略师、Discovery 教练、售前工程师、Outbound 策略师、Pipeline 分析师、投标策略师</p>
+</details>
+
+<details>
+<summary>金融部（3 个）</summary>
+<p>财务预测分析师、发票管理专家、金融风控分析师</p>
+</details>
+
+<details>
+<summary>人力资源部（2 个）</summary>
+<p>招聘专家、绩效管理专家</p>
+</details>
+
+<details>
+<summary>法务部（2 个）</summary>
+<p>合同审查专家、制度文件撰写专家</p>
+</details>
+
+<details>
+<summary>供应链部（3 个）</summary>
+<p>库存预测专家、供应商评估专家、物流路线优化师</p>
+</details>
+
+<details>
+<summary>产品部（5 个）</summary>
+<p>Sprint 排序师、趋势研究员、反馈分析师、行为助推引擎、产品经理</p>
+</details>
+
+<details>
+<summary>项目管理部（6 个）</summary>
+<p>高级项目经理、项目牧羊人、实验追踪员、工作室制片人、工作室运营、Jira 工作流管家</p>
+</details>
+
+<details>
+<summary>测试部（9 个）</summary>
+<p>证据收集者、现实检验者、API 测试员、性能基准师、无障碍审核员、测试结果分析师、工具评估师、工作流优化师、嵌入式测试工程师</p>
+</details>
+
+<details>
+<summary>支持部（8 个）</summary>
+<p>客服响应者、数据分析师、法务合规员、高管摘要师、财务追踪员、基础设施运维师、招聘运营专家、供应链采购策略师</p>
+</details>
+
+<details>
+<summary>专项部（30 个）</summary>
+<p>智能体编排者、提示词工程师、身份信任架构师、数据整合师、LSP 索引工程师、报告分发师、销售数据提取师、合规审计师、应付账款智能体、身份图谱操作员、文化智能策略师、开发者布道师、模型 QA 专家、ZK 管家、区块链安全审计师、留学规划顾问、政务数字化售前顾问、企业培训课程设计师、MCP 构建器、文档生成器、工作流架构师、自动化治理架构师、Salesforce 架构师、医疗健康营销合规师、高考志愿填报顾问、动态定价策略师、AI 治理政策专家、企业风险评估师、会议效率专家</p>
+</details>
+
+<details>
+<summary>空间计算部（6 个）</summary>
+<p>visionOS 空间工程师、macOS Metal 空间工程师、XR 界面架构师、XR 沉浸式开发者、XR 座舱交互专家、终端集成专家</p>
+</details>
+
+<details>
+<summary>游戏开发部（17 个）</summary>
+<p><strong>通用：</strong>游戏设计师、关卡设计师、叙事设计师、技术美术、游戏音频工程师</p>
+<p><strong>Unity：</strong>Unity 架构师、Unity 编辑器工具开发者、Unity 多人游戏工程师、Unity Shader Graph 美术师</p>
+<p><strong>Unreal：</strong>Unreal 多人游戏架构师、Unreal 系统工程师、Unreal 技术美术、Unreal 世界构建师</p>
+<p><strong>Blender：</strong>Blender 插件工程师</p>
+<p><strong>Godot：</strong>Godot 游戏脚本开发者、Godot 多人游戏工程师、Godot Shader 开发者</p>
+<p><strong>Roblox：</strong>Roblox 虚拟形象创作者、Roblox 体验设计师、Roblox 系统脚本工程师</p>
+</details>
+
+<details>
+<summary>学术部（6 个）</summary>
+<p>人类学家、地理学家、历史学家、叙事学家、心理学家、学习规划师</p>
+</details>
+
+<div class="tip">
+  想找特定的智能体？运行 <code>./scripts/search-agents.sh "关键词"</code> 快速搜索。
+</div>
+
+<h2>更多资源</h2>
+<ul>
+  <li><a href="https://github.com/Yhazrin/agency-agents-yhz">GitHub 仓库</a></li>
+  <li><a href="https://github.com/Yhazrin/agency-agents-yhz/blob/main/docs/QUICKSTART.md">快速上手</a></li>
+  <li><a href="https://github.com/Yhazrin/agency-agents-yhz/blob/main/docs/TOOLS-GUIDE.md">工具集成指南</a></li>
+  <li><a href="https://github.com/Yhazrin/agency-agents-yhz/tree/main/examples">工作流示例</a></li>
+  <li><a href="https://github.com/msitarzewski/agency-agents">英文原版</a></li>
+</ul>
+
+<footer>
+  agency-agents-yhz &mdash; 基于 <a href="https://github.com/msitarzewski/agency-agents">agency-agents</a> 翻译并本土化 &mdash; MIT License
+</footer>
+
+</body>
+</html>
