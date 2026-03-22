@@ -104,7 +104,7 @@ main() {
 
   # 2. 创建临时目录并 clone
   TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'agency-agents')
-  trap 'cd / && rm -rf "$TMPDIR"' EXIT
+  trap 'cd / && rm -rf "$TMPDIR" 2>/dev/null || true' EXIT
 
   printf "${C_DIM}正在下载智能体仓库...${C_RESET}\n"
   if ! git clone --depth 1 "$REPO_URL" "$TMPDIR/agency-agents-yhz" 2>/dev/null; then
