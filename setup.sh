@@ -57,6 +57,40 @@ show_terminal_guide() {
   printf "\n"
 }
 
+# 检测已安装的工具
+detect_tools() {
+  local detected=()
+  [[ -d "${HOME}/.claude" ]]                          && detected+=("claude-code")
+  (command -v code >/dev/null 2>&1 || [[ -d "${HOME}/.github" ]]) && detected+=("copilot")
+  (command -v cursor >/dev/null 2>&1 || [[ -d "${HOME}/.cursor" ]]) && detected+=("cursor")
+  (command -v trae >/dev/null 2>&1 || [[ -d "${HOME}/.trae" ]]) && detected+=("trae")
+  (command -v opencode >/dev/null 2>&1 || [[ -d "${HOME}/.config/opencode" ]]) && detected+=("opencode")
+  (command -v openclaw >/dev/null 2>&1 || [[ -d "${HOME}/.openclaw" ]]) && detected+=("openclaw")
+  command -v aider >/dev/null 2>&1                     && detected+=("aider")
+  (command -v windsurf >/dev/null 2>&1 || [[ -d "${HOME}/.codeium" ]]) && detected+=("windsurf")
+  (command -v gemini >/dev/null 2>&1 || [[ -d "${HOME}/.gemini" ]]) && detected+=("gemini-cli")
+  [[ -d "${HOME}/.gemini/antigravity/skills" ]]        && detected+=("antigravity")
+  (command -v qwen >/dev/null 2>&1 || [[ -d "${HOME}/.qwen" ]]) && detected+=("qwen")
+  echo "${detected[*]}"
+}
+
+# 工具显示名
+tool_display_name() {
+  case "$1" in
+    claude-code) echo "Claude Code" ;;
+    copilot)     echo "Copilot" ;;
+    cursor)      echo "Cursor" ;;
+    trae)        echo "Trae" ;;
+    opencode)    echo "OpenCode" ;;
+    openclaw)    echo "OpenClaw" ;;
+    aider)       echo "Aider" ;;
+    windsurf)    echo "Windsurf" ;;
+    gemini-cli)  echo "Gemini CLI" ;;
+    antigravity) echo "Antigravity" ;;
+    qwen)        echo "Qwen Code" ;;
+  esac
+}
+
 # --- 主流程 ---
 main() {
   header "agency-agents-yhz 一键安装"
@@ -70,7 +104,7 @@ main() {
 
   # 2. 创建临时目录并 clone
   TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'agency-agents')
-  trap 'rm -rf "$TMPDIR"' EXIT
+  trap 'cd / && rm -rf "$TMPDIR"' EXIT
 
   printf "${C_DIM}正在下载智能体仓库...${C_RESET}\n"
   if ! git clone --depth 1 "$REPO_URL" "$TMPDIR/agency-agents-yhz" 2>/dev/null; then
@@ -82,9 +116,31 @@ main() {
 
   cd "$TMPDIR/agency-agents-yhz"
 
-  # 3. 转换格式
-  header "转换智能体格式..."
-  bash ./scripts/convert.sh
+  # 3. 检测工具并决定是否需要转换
+  local detected_raw
+  detected_raw="$(detect_tools)"
+  local detected_arr=()
+  if [[ -n "$detected_raw" ]]; then
+    read -ra detected_arr <<< "$detected_raw"
+  fi
+
+  # 只有 claude-code 和 copilot 不需要 integrations/（直接复制源 .md）
+  # 其余工具需要先 convert
+  local needs_convert=false
+  local needs_convert_tools=()
+  for t in "${detected_arr[@]}"; do
+    case "$t" in
+      claude-code|copilot) ;; # 不需要转换
+      *) needs_convert=true; needs_convert_tools+=("$t") ;;
+    esac
+  done
+
+  if $needs_convert; then
+    header "转换智能体格式..."
+    for t in "${needs_convert_tools[@]}"; do
+      bash ./scripts/convert.sh --tool "$t"
+    done
+  fi
 
   # 4. 安装
   header "安装智能体..."
@@ -100,26 +156,12 @@ main() {
   # 6. 引导选择
   printf "\n"
   local tool_name="AI 工具"
-  # 尝试从 install 输出推断安装的工具
-  local detected_tools=()
-  local ALL_TOOLS=(claude-code copilot antigravity gemini-cli opencode openclaw cursor trae aider windsurf qwen)
-  for t in "${ALL_TOOLS[@]}"; do
-    case "$t" in
-      claude-code) [[ -d "${HOME}/.claude" ]] && detected_tools+=("Claude Code") ;;
-      copilot)     (command -v code >/dev/null 2>&1 || [[ -d "${HOME}/.github" ]]) && detected_tools+=("Copilot") ;;
-      cursor)      (command -v cursor >/dev/null 2>&1 || [[ -d "${HOME}/.cursor" ]]) && detected_tools+=("Cursor") ;;
-      trae)        (command -v trae >/dev/null 2>&1 || [[ -d "${HOME}/.trae" ]]) && detected_tools+=("Trae") ;;
-      opencode)    (command -v opencode >/dev/null 2>&1 || [[ -d "${HOME}/.config/opencode" ]]) && detected_tools+=("OpenCode") ;;
-      openclaw)    (command -v openclaw >/dev/null 2>&1 || [[ -d "${HOME}/.openclaw" ]]) && detected_tools+=("OpenClaw") ;;
-      aider)       command -v aider >/dev/null 2>&1 && detected_tools+=("Aider") ;;
-      windsurf)    (command -v windsurf >/dev/null 2>&1 || [[ -d "${HOME}/.codeium" ]]) && detected_tools+=("Windsurf") ;;
-      gemini-cli)  (command -v gemini >/dev/null 2>&1 || [[ -d "${HOME}/.gemini" ]]) && detected_tools+=("Gemini CLI") ;;
-      antigravity) [[ -d "${HOME}/.gemini/antigravity/skills" ]] && detected_tools+=("Antigravity") ;;
-      qwen)        (command -v qwen >/dev/null 2>&1 || [[ -d "${HOME}/.qwen" ]]) && detected_tools+=("Qwen Code") ;;
-    esac
-  done
-  if [[ ${#detected_tools[@]} -gt 0 ]]; then
-    tool_name="${detected_tools[*]}"
+  if [[ ${#detected_arr[@]} -gt 0 ]]; then
+    local display_names=()
+    for t in "${detected_arr[@]}"; do
+      display_names+=("$(tool_display_name "$t")")
+    done
+    tool_name="${display_names[*]}"
   fi
 
   printf "${C_BOLD}安装完成！${C_RESET} 已为 ${C_GREEN}${tool_name}${C_RESET} 安装 180 个智能体。\n"
