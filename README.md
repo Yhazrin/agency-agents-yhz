@@ -1,34 +1,50 @@
-# agency-agents 一键部署教程版（AI 智能体专家团队）
+# agency-agents-yhz — AI 智能体专家团队
 
-🌐 **简体中文** | [繁體中文](README.zh-TW.md) | [English (upstream)](https://github.com/msitarzewski/agency-agents)
+> **180+ 个即插即用的 AI 专家人格，一行命令装好，自然语言激活。**
 
-> **你的 AI 梦之队** — 180+ 个即插即用的 AI 专家人格，支持 11 种 AI 编程工具。
-
+[![GitHub stars](https://img.shields.io/github/stars/Yhazrin/agency-agents-yhz?style=social)](https://github.com/Yhazrin/agency-agents-yhz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 
-| 🤖 AI 智能体 | 🌏 英文版翻译 | 🇨🇳 中国市场原创 | 🧠 支持工具 |
-|:---:|:---:|:---:|:---:|
-| **180** | **135** | **45** | **11 种** |
+| 🤖 智能体总数 | 🇨🇳 中国原创 | 🌏 翻译自上游 | 🧠 支持工具 | 📦 工作流模板 |
+|:---:|:---:|:---:|:---:|:---:|
+| **186** | **45** | **141** | **12 种** | **7 个** |
 
 ---
 
-## 3 分钟快速开始
-
-一行命令，自动检测工具、转换格式、安装完成：
+## 一分钟上手
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Yhazrin/agency-agents-yhz/main/setup.sh | bash
 ```
 
-安装完成后，用自然语言激活智能体：
+脚本会自动检测你装了哪些 AI 工具 → 转换格式 → 安装到位 → 打开引导页。
+
+装完之后，用自然语言激活：
 
 ```
 激活前端开发者模式，帮我审查这个 React 组件。
 作为小红书运营专家，帮我写一篇种草笔记。
+用代码审查员智能体，检查一下这个 PR。
 ```
 
-> 详细安装方式（手动安装、各工具配置）请参阅 **[快速上手](docs/QUICKSTART.md)** 和 **[工具集成指南](docs/TOOLS-GUIDE.md)**。
+> 手动安装或查看各工具配置，见 **[快速上手](docs/QUICKSTART.md)** · **[工具集成指南](docs/TOOLS-GUIDE.md)** · **[速查表](docs/CHEATSHEET.md)**
+
+---
+
+## 这个 fork 做了什么
+
+基于 [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)（英文原版）和 [jnMetaCode/agency-agents-zh](https://github.com/jnMetaCode/agency-agents-zh)（中文社区版），本 fork 重点改进上手体验：
+
+| 功能 | 说明 |
+|------|------|
+| **一行 curl 安装** | 自动检测工具、转换格式、安装，打开 Web 引导 |
+| **12 种工具支持** | Claude Code、Copilot、Cursor、Trae、OpenClaw、OpenCode、Aider、Windsurf、Gemini CLI、Antigravity、Qwen Code、Codex |
+| **Web 引导页** | 安装后自动打开 `guide.html`，深色/浅色自适应 |
+| **工作流模板** | 7 个实战工作流（代码审查、小红书推广、产品 MVP 等） |
+| **多智能体协作** | 预定义组合工作流（`workflows/`），多人协作一气呵成 |
+| **智能体搜索** | `search-agents.sh "关键词"` 快速找到你要的智能体 |
+| **上游同步** | `sync-upstream.sh` 自动拉取上游新增的英文智能体 |
+| **速查表** | `docs/CHEATSHEET.md` — 最常用 10 个智能体 + 复制即用 prompt |
 
 ---
 
@@ -73,16 +89,9 @@ curl -fsSL https://raw.githubusercontent.com/Yhazrin/agency-agents-yhz/main/setu
 <details>
 <summary><strong>🎨 设计部（8 个）</strong></summary>
 
-| 智能体 | 专长 | 适用场景 |
-|--------|------|----------|
-| [UI 设计师](design/design-ui-designer.md) | 视觉设计、组件库、设计系统 | 界面设计、品牌一致性 |
-| [UX 研究员](design/design-ux-researcher.md) | 用户测试、行为分析 | 用户研究、可用性测试 |
-| [UX 架构师](design/design-ux-architect.md) | 信息架构、交互设计、导航系统 | 复杂产品的 UX 架构 |
-| [品牌守护者](design/design-brand-guardian.md) | 品牌标识、一致性、定位 | 品牌策略、视觉规范 |
-| [图像提示词工程师](design/design-image-prompt-engineer.md) | AI 图像生成、提示词优化 | Midjourney/DALL-E 出图 |
-| [视觉叙事师](design/design-visual-storyteller.md) | 数据可视化、视觉叙事 | 信息图、演示文稿 |
-| [趣味注入师](design/design-whimsy-injector.md) | 微交互、彩蛋、趣味元素 | 产品细节体验提升 |
-| [包容性视觉专家](design/design-inclusive-visuals-specialist.md) | 多元化视觉、无障碍设计 | 包容性设计、全球化视觉 |
+UI 设计师、UX 研究员、UX 架构师、品牌守护者、图像提示词工程师、视觉叙事师、趣味注入师、包容性视觉专家
+
+> 详见 [design/](design/) 目录。
 </details>
 
 <details>
@@ -114,139 +123,60 @@ curl -fsSL https://raw.githubusercontent.com/Yhazrin/agency-agents-yhz/main/setu
 </details>
 
 <details>
-<summary><strong>🏦 金融部（3 个）</strong></summary>
+<summary><strong>🏦 金融部（3 个）⭐ · 👔 人力资源部（2 个）⭐ · ⚖️ 法务部（2 个）⭐ · 🚚 供应链部（3 个）⭐</strong></summary>
 
-财务预测分析师⭐、发票管理专家⭐、金融风控分析师⭐
-
-> 详见 [finance/](finance/) 目录。
+- **金融：** 财务预测分析师、发票管理专家、金融风控分析师 → [finance/](finance/)
+- **HR：** 招聘专家、绩效管理专家 → [hr/](hr/)
+- **法务：** 合同审查专家、制度文件撰写专家 → [legal/](legal/)
+- **供应链：** 库存预测专家、供应商评估专家、物流路线优化师 → [supply-chain/](supply-chain/)
 </details>
 
 <details>
-<summary><strong>👔 人力资源部（2 个）</strong></summary>
+<summary><strong>📦 产品部（5 个） · 📋 项目管理部（6 个） · 🧪 测试部（9 个）</strong></summary>
 
-招聘专家⭐、绩效管理专家⭐
-
-> 详见 [hr/](hr/) 目录。
+- **产品：** Sprint 排序师、趋势研究员、反馈分析师、行为助推引擎、产品经理 → [product/](product/)
+- **项目管理：** 高级项目经理、项目牧羊人、实验追踪员、工作室制片人、工作室运营、Jira 工作流管家 → [project-management/](project-management/)
+- **测试：** 证据收集者、现实检验者、API 测试员、性能基准师、无障碍审核员、测试结果分析师、工具评估师、工作流优化师、嵌入式测试工程师⭐ → [testing/](testing/)
 </details>
 
 <details>
-<summary><strong>⚖️ 法务部（2 个）</strong></summary>
+<summary><strong>🤝 支持部（8 个） · 🔬 专项部（30 个） · 🥽 空间计算部（6 个）</strong></summary>
 
-合同审查专家⭐、制度文件撰写专家⭐
-
-> 详见 [legal/](legal/) 目录。
+- **支持：** 客服响应者、数据分析师、法务合规员、高管摘要师、财务追踪员、基础设施运维师、招聘运营专家⭐、供应链采购策略师⭐ → [support/](support/)
+- **专项：** 智能体编排者、提示词工程师⭐、身份信任架构师、MCP 构建器、工作流架构师、Salesforce 架构师 等 30 个 → [specialized/](specialized/)
+- **空间计算：** visionOS 空间工程师、macOS Metal 空间工程师、XR 界面架构师 等 6 个 → [spatial-computing/](spatial-computing/)
 </details>
 
 <details>
-<summary><strong>🚚 供应链部（3 个）</strong></summary>
+<summary><strong>🎮 游戏开发部（17 个） · 📖 学术部（6 个）</strong></summary>
 
-库存预测专家⭐、供应商评估专家⭐、物流路线优化师⭐
-
-> 详见 [supply-chain/](supply-chain/) 目录。
+- **游戏开发：** 通用 5 个 + Unity 4 个 + Unreal 4 个 + Blender 1 个 + Godot 3 个 + Roblox 3 个 → [game-development/](game-development/)
+- **学术：** 人类学家、地理学家、历史学家、叙事学家、心理学家、学习规划师⭐ → [academic/](academic/)
 </details>
 
-<details>
-<summary><strong>📦 产品部（5 个）</strong></summary>
-
-Sprint 排序师、趋势研究员、反馈分析师、行为助推引擎、产品经理
-
-> 详见 [product/](product/) 目录。
-</details>
-
-<details>
-<summary><strong>📋 项目管理部（6 个）</strong></summary>
-
-高级项目经理、项目牧羊人、实验追踪员、工作室制片人、工作室运营、Jira 工作流管家
-
-> 详见 [project-management/](project-management/) 目录。
-</details>
-
-<details>
-<summary><strong>🧪 测试部（9 个）</strong></summary>
-
-证据收集者、现实检验者、API 测试员、性能基准师、无障碍审核员、测试结果分析师、工具评估师、工作流优化师、嵌入式测试工程师⭐
-
-> 详见 [testing/](testing/) 目录。
-</details>
-
-<details>
-<summary><strong>🤝 支持部（8 个）</strong></summary>
-
-客服响应者、数据分析师、法务合规员、高管摘要师、财务追踪员、基础设施运维师、招聘运营专家⭐、供应链采购策略师⭐
-
-> 详见 [support/](support/) 目录。
-</details>
-
-<details>
-<summary><strong>🔬 专项部（30 个）</strong></summary>
-
-智能体编排者、提示词工程师⭐、身份信任架构师、数据整合师、LSP 索引工程师、报告分发师、销售数据提取师、合规审计师、应付账款智能体、身份图谱操作员、文化智能策略师、开发者布道师、模型 QA 专家、ZK 管家、区块链安全审计师、留学规划顾问⭐、政务数字化售前顾问⭐、企业培训课程设计师⭐、MCP 构建器、文档生成器、工作流架构师、自动化治理架构师、Salesforce 架构师、医疗健康营销合规师⭐、高考志愿填报顾问⭐、动态定价策略师⭐、AI 治理政策专家⭐、企业风险评估师⭐、会议效率专家⭐
-
-> 详见 [specialized/](specialized/) 目录。
-</details>
-
-<details>
-<summary><strong>🥽 空间计算部（6 个）</strong></summary>
-
-visionOS 空间工程师、macOS Metal 空间工程师、XR 界面架构师、XR 沉浸式开发者、XR 座舱交互专家、终端集成专家
-
-> 详见 [spatial-computing/](spatial-computing/) 目录。
-</details>
-
-<details>
-<summary><strong>🎮 游戏开发部（17 个）</strong></summary>
-
-**通用：** 游戏设计师、关卡设计师、叙事设计师、技术美术、游戏音频工程师
-
-**Unity：** Unity 架构师、Unity 编辑器工具开发者、Unity 多人游戏工程师、Unity Shader Graph 美术师
-
-**Unreal：** Unreal 多人游戏架构师、Unreal 系统工程师、Unreal 技术美术、Unreal 世界构建师
-
-**Blender：** Blender 插件工程师
-
-**Godot：** Godot 游戏脚本开发者、Godot 多人游戏工程师、Godot Shader 开发者
-
-**Roblox：** Roblox 虚拟形象创作者、Roblox 体验设计师、Roblox 系统脚本工程师
-
-> 详见 [game-development/](game-development/) 目录。
-</details>
-
-<details>
-<summary><strong>📖 学术部（6 个）</strong></summary>
-
-人类学家、地理学家、历史学家、叙事学家、心理学家、学习规划师⭐
-
-> 详见 [academic/](academic/) 目录。
-</details>
-
-<details>
-<summary><strong>🎯 战略部</strong></summary>
-
-从发现到运营的全流程战略指导。详见 [strategy/](strategy/) 目录。
-
-| 文档 | 内容 |
-|------|------|
-| [高管简报](strategy/EXECUTIVE-BRIEF.md) | NEXUS 战略概览 |
-| [快速上手](strategy/QUICKSTART.md) | 5 分钟上手指南 |
-| [完整战略](strategy/nexus-strategy.md) | 运营纲领全文 |
-| Phase 0-6 Playbooks | [发现](strategy/playbooks/phase-0-discovery.md) · [策略](strategy/playbooks/phase-1-strategy.md) · [基础](strategy/playbooks/phase-2-foundation.md) · [构建](strategy/playbooks/phase-3-build.md) · [加固](strategy/playbooks/phase-4-hardening.md) · [上线](strategy/playbooks/phase-5-launch.md) · [运营](strategy/playbooks/phase-6-operate.md) |
-</details>
+> 完整列表见 [AGENT-LIST.md](AGENT-LIST.md)，战略相关见 [strategy/](strategy/)。
 
 ---
 
-## 实战案例
+## 实战工作流
 
-**场景一：代码审查** — 代码审查员 + 安全工程师 + 性能基准师，全面审查 PR。[完整流程](examples/workflow-code-review.md)
+不只是单个智能体——预定义的多智能体协作流程：
 
-**场景二：小红书品牌推广** — 小红书运营 + 内容创作者 + 品牌守护者 + 数据分析师 + 增长黑客。[完整流程](examples/workflow-xiaohongshu-launch.md)
+| 场景 | 用到的智能体 | 链接 |
+|------|------------|------|
+| **代码审查** | 代码审查员 + 安全工程师 + 性能基准师 | [查看](examples/workflow-code-review.md) |
+| **小红书品牌推广** | 小红书运营 + 内容创作者 + 品牌守护者 + 数据分析师 + 增长黑客 | [查看](examples/workflow-xiaohongshu-launch.md) |
+| **出海产品 MVP** | 前端开发者 + 后端架构师 + 快速原型师 + 增长黑客 + 现实检验者 | [查看](examples/workflow-startup-mvp.md) |
+| **产品发布全流程** | 产品经理 → 前端 → 后端 → 测试 → 营销 | [查看](workflows/product-launch.md) |
+| **营销活动** | 营销策略师 → 内容创作者 → 数据分析师 → 增长黑客 | [查看](workflows/marketing-campaign.md) |
 
-**场景三：出海产品 MVP** — 前端开发者 + 后端架构师 + 增长黑客 + 快速原型师 + 现实检验者。
-
-> 更多示例见 [examples/](examples/) 目录。
+> 更多工作流见 [examples/](examples/) 和 [workflows/](workflows/) 目录。
 
 ---
 
 ## 搜索智能体
+
+180+ 个太多了找不到？用搜索脚本：
 
 ```bash
 ./scripts/search-agents.sh "小红书"
@@ -258,9 +188,23 @@ visionOS 空间工程师、macOS Metal 空间工程师、XR 界面架构师、XR
 
 ## 工具集成
 
-支持 **11 种 AI 编程工具**：Claude Code、GitHub Copilot、Cursor、Trae、OpenClaw、OpenCode、Aider、Windsurf、Antigravity、Gemini CLI、Qwen Code。
+支持 **12 种 AI 编程工具**：Claude Code、GitHub Copilot、Cursor、Trae、OpenClaw、OpenCode、Aider、Windsurf、Gemini CLI、Antigravity、Qwen Code、Codex CLI。
 
-详细安装说明请参阅 **[工具集成指南](docs/TOOLS-GUIDE.md)**。
+详细安装说明见 **[工具集成指南](docs/TOOLS-GUIDE.md)**。
+
+---
+
+## 实用脚本
+
+| 脚本 | 用途 |
+|------|------|
+| `setup.sh` | 一键安装（curl 用） |
+| `scripts/install.sh` | 安装到指定工具 |
+| `scripts/convert.sh` | 转换智能体格式 |
+| `scripts/search-agents.sh` | 按关键词搜索智能体 |
+| `scripts/create-agent.sh` | 交互式创建自定义智能体 |
+| `scripts/sync-upstream.sh` | 同步上游新增智能体 |
+| `scripts/lint-agents.sh` | 校验智能体文件格式 |
 
 ---
 
@@ -273,6 +217,7 @@ visionOS 空间工程师、macOS Metal 空间工程师、XR 界面架构师、XR
 ## 致谢
 
 - 原始英文版：[msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)（MIT 协议）
+- 中文社区版：[jnMetaCode/agency-agents-zh](https://github.com/jnMetaCode/agency-agents-zh)
 
 ---
 
@@ -280,8 +225,8 @@ MIT License
 
 <div align="center">
 
-**AI 智能体专家团队：你的 AI 梦之队**
+**agency-agents-yhz：你的 AI 梦之队**
 
-[Star 本项目](https://github.com/jnMetaCode/agency-agents-zh) · [提交 Issue](https://github.com/jnMetaCode/agency-agents-zh/issues) · [贡献代码](https://github.com/jnMetaCode/agency-agents-zh/pulls)
+[Star 本项目](https://github.com/Yhazrin/agency-agents-yhz) · [提交 Issue](https://github.com/Yhazrin/agency-agents-yhz/issues) · [贡献代码](https://github.com/Yhazrin/agency-agents-yhz/pulls)
 
 </div>
