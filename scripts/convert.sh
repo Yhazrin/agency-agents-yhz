@@ -19,6 +19,8 @@
 #   openclaw     — OpenClaw SOUL.md 文件 (openclaw_workspace/<agent>/SOUL.md)
 #   qwen         — Qwen Code SubAgent 文件 (~/.qwen/agents/*.md)
 #   codex        — OpenAI Codex CLI agent 文件 (.codex/agents/*.toml)
+#   deerflow     — DeerFlow 2.0 custom skill 文件 (skills/custom/<slug>/SKILL.md)
+#   kiro         — Kiro agent JSON 文件 (.kiro/agents/*.json + prompts/*.md)
 #   all          — 所有工具（默认）
 #
 # 输出到仓库根目录下的 integrations/<tool>/。
@@ -51,7 +53,7 @@ AGENT_DIRS=(
 
 # --- 用法 ---
 usage() {
-  sed -n '3,22p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '3,27p' "$0" | sed 's/^# \{0,1\}//'
   exit 0
 }
 
@@ -360,6 +362,58 @@ ${escaped_body}
 HEREDOC
 }
 
+convert_deerflow() {
+  local file="$1"
+  local name description slug outdir outfile body
+
+  name="$(get_field "name" "$file")"
+  description="$(get_field "description" "$file")"
+  slug="$(slugify_from_file "$file")"
+  body="$(get_body "$file")"
+
+  outdir="$OUT_DIR/deerflow/$slug"
+  outfile="$outdir/SKILL.md"
+  mkdir -p "$outdir"
+
+  cat > "$outfile" <<HEREDOC
+---
+name: ${slug}
+description: ${description}
+---
+${body}
+HEREDOC
+}
+
+convert_kiro() {
+  local file="$1"
+  local name description slug body
+
+  name="$(get_field "name" "$file")"
+  description="$(get_field "description" "$file")"
+  slug="$(slugify_from_file "$file")"
+  body="$(get_body "$file")"
+
+  mkdir -p "$OUT_DIR/kiro/prompts"
+
+  # 写入 prompt 文件
+  cat > "$OUT_DIR/kiro/prompts/${slug}.md" <<HEREDOC
+${body}
+HEREDOC
+
+  # 写入 JSON 配置文件
+  # 需要转义 description 中的双引号
+  local escaped_desc
+  escaped_desc="$(echo "$description" | sed 's/"/\\"/g')"
+
+  cat > "$OUT_DIR/kiro/${slug}.json" <<HEREDOC
+{
+  "name": "${slug}",
+  "description": "${escaped_desc}",
+  "prompt": "file://./prompts/${slug}.md"
+}
+HEREDOC
+}
+
 # Aider 和 Windsurf 是单文件格式，先累积再统一写入
 AIDER_TMP="$(mktemp)"
 WINDSURF_TMP="$(mktemp)"
@@ -456,6 +510,8 @@ run_conversions() {
         openclaw)    convert_openclaw    "$file" ;;
         qwen)        convert_qwen        "$file" ;;
         codex)       convert_codex       "$file" ;;
+        deerflow)    convert_deerflow    "$file" ;;
+        kiro)        convert_kiro        "$file" ;;
         aider)       accumulate_aider    "$file" ;;
         windsurf)    accumulate_windsurf "$file" ;;
       esac
@@ -482,7 +538,7 @@ main() {
     esac
   done
 
-  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "trae" "aider" "windsurf" "openclaw" "qwen" "codex" "all")
+  local valid_tools=("antigravity" "gemini-cli" "opencode" "cursor" "trae" "aider" "windsurf" "openclaw" "qwen" "codex" "deerflow" "kiro" "all")
   local valid=false
   for t in "${valid_tools[@]}"; do [[ "$t" == "$tool" ]] && valid=true && break; done
   if ! $valid; then
@@ -498,7 +554,7 @@ main() {
 
   local tools_to_run=()
   if [[ "$tool" == "all" ]]; then
-    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "trae" "aider" "windsurf" "openclaw" "qwen" "codex")
+    tools_to_run=("antigravity" "gemini-cli" "opencode" "cursor" "trae" "aider" "windsurf" "openclaw" "qwen" "codex" "deerflow" "kiro")
   else
     tools_to_run=("$tool")
   fi

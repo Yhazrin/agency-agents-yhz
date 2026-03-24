@@ -24,7 +24,7 @@ jobs:
           while IFS= read -r file; do
             # Skip non-agent files
             case "$file" in
-              ./README*|./CONTRIBUTING*|./UPSTREAM*|./AGENT-LIST*|./CODE_OF_CONDUCT*|./.github/*|./scripts/*|./examples/*|./integrations/*|./docs/*) continue ;;
+              ./README*|./CONTRIBUTING*|./UPSTREAM*|./AGENT-LIST*|./CATALOG*|./CODE_OF_CONDUCT*|./.github/*|./scripts/*|./examples/*|./integrations/*|./docs/*|./strategy/*) continue ;;
             esac
 
             # Check frontmatter exists

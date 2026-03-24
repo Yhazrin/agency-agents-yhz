@@ -14,7 +14,7 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 
 | 🤖 AI 智能體 | 🌏 英文版翻譯 | 🇨🇳 中國市場原創 | 🧠 支援工具 |
 |:---:|:---:|:---:|:---:|
-| **186** | **142** | **44** | **12 種** |
+| **186** | **142** | **44** | **14 種** |
 
 ---
 
@@ -28,7 +28,7 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 
 ### 方式一：一鍵安裝到你的 AI 工具
 
-支援 **12 種主流 AI 程式設計工具**，一條命令搞定：
+支援 **14 種主流 AI 程式設計工具**，一條命令搞定：
 
 ```bash
 # 自動檢測已安裝的工具，一鍵安裝
@@ -38,6 +38,7 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 ./scripts/install.sh --tool claude-code    # Claude Code
 ./scripts/install.sh --tool copilot        # GitHub Copilot
 ./scripts/install.sh --tool cursor         # Cursor
+./scripts/install.sh --tool kiro           # Kiro (Amazon)
 ./scripts/install.sh --tool trae           # Trae
 ./scripts/install.sh --tool openclaw       # OpenClaw
 ./scripts/install.sh --tool opencode       # OpenCode
@@ -47,6 +48,7 @@ Chinese community edition of [agency-agents](https://github.com/msitarzewski/age
 ./scripts/install.sh --tool gemini-cli     # Gemini CLI
 ./scripts/install.sh --tool qwen           # Qwen Code
 ./scripts/install.sh --tool codex          # Codex CLI
+./scripts/install.sh --tool deerflow       # DeerFlow 2.0 (ByteDance)
 ```
 
 > Claude Code 和 GitHub Copilot 可直接安裝；其他工具需先執行 `./scripts/convert.sh` 轉換格式。
@@ -438,7 +440,7 @@ cp -r marketing/*.md ~/.claude/agents/
 
 ## 工具整合
 
-支援 **12 種主流 AI 程式設計工具**，透過 `scripts/` 目錄下的指令碼實現格式轉換和一鍵安裝。
+支援 **14 種主流 AI 程式設計工具**，透過 `scripts/` 目錄下的指令碼實現格式轉換和一鍵安裝。
 
 ### 支援的工具
 
@@ -446,6 +448,7 @@ cp -r marketing/*.md ~/.claude/agents/
 |------|----------|------|
 | **Claude Code** | `~/.claude/agents/` | 全域性，直接複製 |
 | **GitHub Copilot** | `~/.github/agents/` + `~/.copilot/agents/` | 全域性，直接複製 |
+| **Kiro** (Amazon) | `~/.kiro/agents/` | 全域性，需轉換 |
 | **OpenClaw** | `~/.openclaw/agency-agents/` | 全域性，需轉換 |
 | **Antigravity** | `~/.gemini/antigravity/skills/` | 全域性，需轉換 |
 | **Gemini CLI** | `~/.gemini/extensions/agency-agents/` | 全域性，需轉換 |
@@ -456,6 +459,7 @@ cp -r marketing/*.md ~/.claude/agents/
 | **Aider** | `CONVENTIONS.md` | 專案級，需轉換 |
 | **Windsurf** | `.windsurfrules` | 專案級，需轉換 |
 | **Codex CLI** | `.codex/agents/` | 專案級，需轉換 |
+| **DeerFlow 2.0** (位元組跳動) | `skills/custom/` | 專案級，需轉換 |
 
 ### 使用方法
 
@@ -675,6 +679,46 @@ cd /your/project
 ```
 
 在 Codex 中使用時，智能體會作為 subagent 被呼叫。也可以在 `AGENTS.md` 中引用。
+</details>
+
+<details>
+<summary><strong>Kiro (Amazon)</strong></summary>
+
+Amazon 的 Spec 驅動 AI IDE，基於 Claude 模型。每個智能體轉換為 JSON 設定 + 提示詞檔案，安裝到 `~/.kiro/agents/`（全域）。
+
+```bash
+./scripts/convert.sh --tool kiro
+./scripts/install.sh --tool kiro
+```
+
+在 Kiro 中切換智能體：
+```
+/agent swap
+```
+
+或啟動時直接指定：
+```bash
+kiro-cli --agent engineering-frontend-developer
+```
+</details>
+
+<details>
+<summary><strong>DeerFlow 2.0 (位元組跳動)</strong></summary>
+
+位元組跳動的開源 SuperAgent 框架，支援子代理、沙箱、持久記憶。每個智能體轉換為 `SKILL.md` 技能檔案。
+
+```bash
+./scripts/convert.sh --tool deerflow
+./scripts/install.sh --tool deerflow
+```
+
+預設安裝到當前目錄的 `skills/custom/`。可透過環境變數自訂路徑：
+
+```bash
+DEERFLOW_SKILLS_DIR=/path/to/deerflow/skills/custom ./scripts/install.sh --tool deerflow
+```
+
+安裝後在 DeerFlow 的任務中，相關技能會自動載入。
 </details>
 
 ### 修改智能體後重新生成

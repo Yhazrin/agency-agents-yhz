@@ -21,6 +21,8 @@
 #   openclaw     -- 复制到 ~/.openclaw/agency-agents/
 #   qwen         -- 复制 SubAgent 到 .qwen/agents/（项目级）
 #   codex        -- 复制到 .codex/agents/（项目级）
+#   deerflow     -- 复制到 DeerFlow custom skills 目录（Docker 项目级）
+#   kiro         -- 复制到 ~/.kiro/agents/（全局）
 #   all          -- 安装所有已检测到的工具（默认）
 
 set -euo pipefail
@@ -44,11 +46,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 INTEGRATIONS="$REPO_ROOT/integrations"
 
-ALL_TOOLS=(claude-code copilot antigravity gemini-cli opencode openclaw cursor trae aider windsurf qwen codex)
+ALL_TOOLS=(claude-code copilot antigravity gemini-cli opencode openclaw cursor trae aider windsurf qwen codex deerflow kiro)
 
 # --- 用法 ---
 usage() {
-  sed -n '3,22p' "$0" | sed 's/^# \{0,1\}//'
+  sed -n '3,26p' "$0" | sed 's/^# \{0,1\}//'
   exit 0
 }
 
@@ -78,6 +80,8 @@ detect_openclaw()     { command -v openclaw >/dev/null 2>&1 || [[ -d "${HOME}/.o
 detect_windsurf()     { command -v windsurf >/dev/null 2>&1 || [[ -d "${HOME}/.codeium" ]]; }
 detect_qwen()         { command -v qwen >/dev/null 2>&1 || [[ -d "${HOME}/.qwen" ]]; }
 detect_codex()        { command -v codex >/dev/null 2>&1 || [[ -d "${HOME}/.codex" ]]; }
+detect_deerflow()     { command -v deerflow >/dev/null 2>&1 || [[ -d "${HOME}/.deerflow" ]] || docker ps --format '{{.Names}}' 2>/dev/null | grep -q deerflow; }
+detect_kiro()         { command -v kiro >/dev/null 2>&1 || command -v kiro-cli >/dev/null 2>&1 || [[ -d "${HOME}/.kiro" ]]; }
 
 is_detected() {
   case "$1" in
@@ -93,6 +97,8 @@ is_detected() {
     windsurf)    detect_windsurf    ;;
     qwen)        detect_qwen        ;;
     codex)       detect_codex       ;;
+    deerflow)    detect_deerflow    ;;
+    kiro)        detect_kiro        ;;
     *)           return 1 ;;
   esac
 }
@@ -110,6 +116,8 @@ tool_label() {
     windsurf)    printf "%-14s  %s" "Windsurf"     "(.windsurfrules)"       ;;
     qwen)        printf "%-14s  %s" "Qwen Code"    "(~/.qwen/agents)"       ;;
     codex)       printf "%-14s  %s" "Codex CLI"    "(.codex/agents)"        ;;
+    deerflow)    printf "%-14s  %s" "DeerFlow"     "(skills/custom)"        ;;
+    kiro)        printf "%-14s  %s" "Kiro"         "(~/.kiro/agents)"       ;;
   esac
 }
 
@@ -319,6 +327,55 @@ install_codex() {
   warn "Codex CLI: 项目级安装。请在项目根目录运行。"
 }
 
+install_deerflow() {
+  local src="$INTEGRATIONS/deerflow"
+  local dest="${DEERFLOW_SKILLS_DIR:-./skills/custom}"
+  local count=0
+
+  [[ -d "$src" ]] || { err "integrations/deerflow 不存在。请先运行 convert.sh --tool deerflow"; return 1; }
+
+  mkdir -p "$dest"
+
+  local d
+  while IFS= read -r -d '' d; do
+    local name; name="$(basename "$d")"
+    [[ -f "$d/SKILL.md" ]] || continue
+    mkdir -p "$dest/$name"
+    cp "$d/SKILL.md" "$dest/$name/SKILL.md"
+    (( count++ )) || true
+  done < <(find "$src" -mindepth 1 -maxdepth 1 -type d -print0)
+
+  ok "DeerFlow: $count 个 skills -> $dest"
+  warn "DeerFlow: 默认安装到 ./skills/custom/。设置 DEERFLOW_SKILLS_DIR 可自定义路径。"
+}
+
+install_kiro() {
+  local src="$INTEGRATIONS/kiro"
+  local dest="${HOME}/.kiro/agents"
+  local count=0
+
+  [[ -d "$src" ]] || { err "integrations/kiro 不存在。请先运行 convert.sh --tool kiro"; return 1; }
+
+  mkdir -p "$dest/prompts"
+
+  # 复制 JSON 配置文件
+  local f
+  while IFS= read -r -d '' f; do
+    cp "$f" "$dest/"
+    (( count++ )) || true
+  done < <(find "$src" -maxdepth 1 -name "*.json" -print0)
+
+  # 复制 prompt 文件
+  if [[ -d "$src/prompts" ]]; then
+    while IFS= read -r -d '' f; do
+      cp "$f" "$dest/prompts/"
+    done < <(find "$src/prompts" -maxdepth 1 -name "*.md" -print0)
+  fi
+
+  ok "Kiro: $count 个智能体 -> $dest"
+  warn "提示: 在 Kiro 中使用 '/agent swap' 切换智能体"
+}
+
 install_tool() {
   case "$1" in
     claude-code) install_claude_code ;;
@@ -333,6 +390,8 @@ install_tool() {
     windsurf)    install_windsurf    ;;
     qwen)        install_qwen        ;;
     codex)       install_codex       ;;
+    deerflow)    install_deerflow    ;;
+    kiro)        install_kiro        ;;
   esac
 }
 
